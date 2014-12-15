@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html ng-app="store" xmlns="http://www.w3.org/1999/xhtml">
+<head >
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
+</head>
+<body ng-controller="StoreController as store" >
+
+
+    <div ng-repeat="product in store.products" ng-hide="store.product.soldOut">
+        <h1>{{ product.name }}</h1>
+        <h2>${{ product.price }}</h2>
+        <p> </p>
+        <button ng-show="{{product.canPurchase}}">Add to cart</button>
+        
+        <section ng-controller="PanelController as panel">
+            <ul class="nav nav-pills">
+                <li ng-class="{ active:panel.isSelected(1) }"> 
+                    <a href ng-click="panel.selectTab(1)">Description</a></li>
+                <li ng-class="{ active:panel.isSelected(2)}"> 
+                    <a href ng-click="panel.selectTab(2)">Specifications</a></li>
+                <li ng-class="{ active:panel.isSelected(3)}"> 
+                    <a href ng-click="panel.selectTab(3)">Reviews</a></li>
+            </ul>
+
+            <div class="panel" ng-show="panel.isSelected(1)">
+                <h4>Description</h4>
+                <p>{{ product.description }}</p>
+            </div>
+            <div class="panel" ng-show="panel.isSelected(2)">
+                <h4>Specifications</h4>
+                <p>None yet</p>
+            </div>
+            <div class="panel" ng-show="panel.isSelected(3)">
+                <h4>Reviews</h4>
+                <p>None yet</p>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+<!-- 
+    Angular learning summary
+
+    Directives - all the ng html attributes that angular hooks into
+    Modules - used for splitting up code into logical components / applications ??
+    expressions - stuff inside the {{ }}
+    controllers - where we define app behavior by defining functions and values
+
+    angular filters can be applied to expressions or any ng attribute value. Examples:
+
+    {{product.price | currency}}
+    {{product.description | limitTo:8}}
+    {{product.description | uppercase}}
+-->
